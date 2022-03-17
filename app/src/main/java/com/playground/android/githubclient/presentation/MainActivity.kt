@@ -1,5 +1,7 @@
 package com.playground.android.githubclient.presentation
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -12,6 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContent {
@@ -20,6 +23,12 @@ class MainActivity : ComponentActivity() {
           Navigation()
         }
       }
+    }
+  }
+
+  companion object {
+    fun start(context: Context) {
+      context.startActivity(Intent(context, MainActivity::class.java))
     }
   }
 }

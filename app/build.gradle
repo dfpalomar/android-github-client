@@ -77,4 +77,5 @@ dependencies {
   implementation "io.coil-kt:coil-compose:$coil_version"
   implementation "com.jakewharton.threetenabp:threetenabp:$threetenabp_version"
   implementation "com.dropbox.mobile.store:store4:$store_version"
+  implementation "androidx.core:core-splashscreen:$splash_screen_version"
 }
