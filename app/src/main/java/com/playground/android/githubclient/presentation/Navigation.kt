@@ -1,4 +1,4 @@
-package com.playground.android.githubclient
+package com.playground.android.githubclient.presentation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
