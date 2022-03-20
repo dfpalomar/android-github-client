@@ -6,6 +6,8 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
@@ -28,6 +30,16 @@ abstract class BaseViewModel<Event : ViewEvent, UiState : ViewState, Effect : Vi
 
   private val _effect: Channel<Effect> = Channel()
   val effect = _effect.receiveAsFlow()
+
+  init {
+    subscribeToEvents()
+  }
+
+  private fun subscribeToEvents() {
+    viewModelScope.launch {
+      _event.onEach { handleEvents(it) }.collect()
+    }
+  }
 
   fun setEvent(event: Event) {
     viewModelScope.launch { _event.emit(event) }

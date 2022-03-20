@@ -22,7 +22,7 @@ fun Navigation() {
 private fun NavGraphBuilder.addTrendingRepos(navController: NavController) {
   composable(route = Screen.TrendingRepos.route) {
     TrendingReposScreen(
-      openRepoDetails = { repositoryId ->
+      showContributors = { repositoryId ->
         navController.navigate(Screen.RepoDetails.createRoute(repositoryId)) {
           launchSingleTop = true
         }
