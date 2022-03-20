@@ -1,6 +1,5 @@
-package com.playground.android.githubclient.domain
+package com.playground.android.githubclient.data
 
-import com.playground.android.githubclient.data.GithubApi
 import com.playground.android.githubclient.domain.model.Contributor
 import com.playground.android.githubclient.domain.model.Repository
 import com.playground.android.githubclient.domain.model.RepositoryCoordinate

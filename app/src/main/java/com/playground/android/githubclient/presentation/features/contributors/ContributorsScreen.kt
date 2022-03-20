@@ -1,4 +1,4 @@
-package com.playground.android.githubclient.presentation.contributors
+package com.playground.android.githubclient.presentation.features.contributors
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -37,9 +37,9 @@ import com.playground.android.githubclient.domain.model.Contributor
 import com.playground.android.githubclient.domain.model.RepositoryCoordinate
 import com.playground.android.githubclient.presentation.common.ErrorMessage
 import com.playground.android.githubclient.presentation.common.IndeterminateProgressIndicator
-import com.playground.android.githubclient.presentation.contributors.ContributorsViewState.Data
-import com.playground.android.githubclient.presentation.contributors.ContributorsViewState.Error
-import com.playground.android.githubclient.presentation.contributors.ContributorsViewState.Loading
+import com.playground.android.githubclient.presentation.features.contributors.ContributorsViewState.Data
+import com.playground.android.githubclient.presentation.features.contributors.ContributorsViewState.Error
+import com.playground.android.githubclient.presentation.features.contributors.ContributorsViewState.Loading
 import com.playground.android.githubclient.presentation.util.rememberFlowWithLifecycle
 
 @Composable

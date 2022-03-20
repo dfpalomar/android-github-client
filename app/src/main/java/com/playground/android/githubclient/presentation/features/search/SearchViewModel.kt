@@ -1,8 +1,8 @@
-package com.playground.android.githubclient.presentation.search
+package com.playground.android.githubclient.presentation.features.search
 
 import androidx.lifecycle.viewModelScope
-import com.playground.android.githubclient.core.BaseViewModel
-import com.playground.android.githubclient.domain.GithubRepository
+import com.playground.android.githubclient.data.GithubRepository
+import com.playground.android.githubclient.presentation.core.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview

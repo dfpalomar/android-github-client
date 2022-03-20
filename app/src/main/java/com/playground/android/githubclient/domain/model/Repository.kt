@@ -1,7 +1,5 @@
 package com.playground.android.githubclient.domain.model
 
-typealias RepositoryId = String
-
 data class Repository(
   val name: String,
   val owner: String,

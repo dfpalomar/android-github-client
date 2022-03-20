@@ -1,7 +1,7 @@
-package com.playground.android.githubclient.presentation.contributors
+package com.playground.android.githubclient.presentation.features.contributors
 
-import com.playground.android.githubclient.core.ViewEvent
-import com.playground.android.githubclient.core.ViewState
+import com.playground.android.githubclient.presentation.core.ViewEvent
+import com.playground.android.githubclient.presentation.core.ViewState
 import com.playground.android.githubclient.domain.model.Contributor
 import com.playground.android.githubclient.domain.model.RepositoryCoordinate
 

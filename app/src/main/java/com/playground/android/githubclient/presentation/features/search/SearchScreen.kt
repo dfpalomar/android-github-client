@@ -1,4 +1,4 @@
-package com.playground.android.githubclient.presentation.search
+package com.playground.android.githubclient.presentation.features.search
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

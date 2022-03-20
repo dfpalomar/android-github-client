@@ -10,8 +10,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.playground.android.githubclient.domain.model.RepositoryCoordinate
-import com.playground.android.githubclient.presentation.contributors.ContributorsScreen
-import com.playground.android.githubclient.presentation.search.SearchScreen
+import com.playground.android.githubclient.presentation.features.contributors.ContributorsScreen
+import com.playground.android.githubclient.presentation.features.search.SearchScreen
 
 @Composable
 fun Navigation() {

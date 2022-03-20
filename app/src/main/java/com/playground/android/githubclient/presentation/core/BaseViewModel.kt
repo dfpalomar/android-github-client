@@ -1,4 +1,4 @@
-package com.playground.android.githubclient.core
+package com.playground.android.githubclient.presentation.core
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
