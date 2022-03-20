@@ -9,8 +9,9 @@ interface GithubApi {
   @GET("search/repositories?sort=stars")
   suspend fun search(@Query("q") query: String): SearchResponseDTO
 
-  @GET("repos/{repo}/contributors")
-  suspend fun contributors(@Path("repo") repository: String): List<ContributorDTO>
+  @GET("repos/{owner}/{repo}/contributors")
+  suspend fun contributors(
+    @Path("owner") owner: String,
+    @Path("repo") repository: String
+  ): List<ContributorDTO>
 }
-
-const val QUERY_PARAM_TOPIC = "topic:"

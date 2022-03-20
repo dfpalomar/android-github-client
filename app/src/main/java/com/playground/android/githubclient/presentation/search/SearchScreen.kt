@@ -53,14 +53,14 @@ import coil.transform.CircleCropTransformation
 import com.playground.android.githubclient.R
 import com.playground.android.githubclient.R.string
 import com.playground.android.githubclient.domain.model.Repository
-import com.playground.android.githubclient.domain.model.RepositoryId
+import com.playground.android.githubclient.domain.model.RepositoryCoordinate
 import com.playground.android.githubclient.presentation.common.ErrorMessage
 import com.playground.android.githubclient.presentation.common.IndeterminateProgressIndicator
 import com.playground.android.githubclient.presentation.util.rememberFlowWithLifecycle
 
 @Composable
 fun SearchScreen(
-  showContributors: (RepositoryId) -> Unit
+  showContributors: (RepositoryCoordinate) -> Unit
 ) {
   val viewModel: SearchViewModel = hiltViewModel()
 
@@ -79,7 +79,7 @@ fun SearchScreen(
 fun Search(
   viewState: SearchViewState,
   searchTerm: (String) -> Unit,
-  showContributors: (String) -> Unit // TODO Use value class?
+  showContributors: (RepositoryCoordinate) -> Unit
 ) {
   Column(
     Modifier
@@ -95,7 +95,7 @@ fun Search(
       if (viewState.errorFound) {
         ErrorMessage(
           modifier = Modifier.fillMaxSize(),
-          errorMessage = "Error searching", // TODO change message
+          message = "There was an error",
         )
       } else {
         if (viewState != SearchViewState.Idle && viewState.repositoryList.isEmpty()) {
@@ -110,7 +110,7 @@ fun Search(
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun SearchBar(
+private fun SearchBar(
   modifier: Modifier = Modifier,
   value: String,
   onTextUpdate: (String) -> Unit
@@ -162,11 +162,9 @@ private fun NoResults(searchTerm: String) {
 @Composable
 private fun SearchResultsList(
   repositories: List<Repository>,
-  showContributors: (String) -> Unit
+  showContributors: (RepositoryCoordinate) -> Unit
 ) {
-  LazyColumn(
-    contentPadding = PaddingValues(vertical = 16.dp)
-  ) {
+  LazyColumn(contentPadding = PaddingValues(vertical = 16.dp)) {
     itemsIndexed(repositories) { _, repository ->
       SearchResultListItem(repository, showContributors)
     }
@@ -176,12 +174,12 @@ private fun SearchResultsList(
 @Composable
 private fun SearchResultListItem(
   repository: Repository,
-  showContributors: (String) -> Unit
+  showContributors: (RepositoryCoordinate) -> Unit
 ) {
   Box(modifier = Modifier
     .fillMaxWidth()
     .background(MaterialTheme.colors.surface)
-    .clickable { showContributors(repository.owner) }
+    .clickable { showContributors(repository.coordinate) }
   ) {
     Row(
       Modifier
@@ -191,10 +189,11 @@ private fun SearchResultListItem(
     ) {
       Image(
         painter = rememberImagePainter(
-          data = repository.ownerAvatarUrl.also {
-            println("CMC: URL: $it")
-          },
-          builder = { transformations(CircleCropTransformation()) }
+          data = repository.ownerAvatarUrl,
+          builder = {
+            crossfade(true)
+            transformations(CircleCropTransformation())
+          }
         ),
         modifier = Modifier
           .height(56.dp)
@@ -261,11 +260,12 @@ private fun SearchResultListItem(
 private fun PreviewSearchResultListItem() {
   SearchResultListItem(
     Repository(
-      fullName = "square/Retrofit",
+      name = "Retrofit",
+      owner = "Square",
+      ownerAvatarUrl = "",
       stars = 45000,
       forks = 899,
-      license = "MIT",
-      ownerAvatarUrl = ""
+      license = "MIT"
     )
   ) {}
 }

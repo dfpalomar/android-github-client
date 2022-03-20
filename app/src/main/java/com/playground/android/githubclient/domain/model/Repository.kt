@@ -1,15 +1,14 @@
 package com.playground.android.githubclient.domain.model
 
+typealias RepositoryId = String
+
 data class Repository(
-  val fullName: String,
+  val name: String,
+  val owner: String,
+  val ownerAvatarUrl: String,
   val stars: Int,
   val forks: Int,
-  val license: String?,
-  val ownerAvatarUrl: String
+  val license: String?
 ) {
-  val owner: String
-    get() = fullName.split("/")[0]
-
-  val name: String
-    get() = fullName.split("/")[1]
+  val coordinate = RepositoryCoordinate(owner = owner, name = name)
 }
