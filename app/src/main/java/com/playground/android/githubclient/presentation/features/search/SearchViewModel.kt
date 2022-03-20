@@ -35,9 +35,8 @@ class SearchViewModel @Inject constructor(
   private fun observeSearchRequest() {
     searchTermFlow
       .drop(1)
-      .onEach { setState { copy(searchTerm = it, errorFound = false) } }
+      .onEach { setState { copy(searchTerm = it, isLoading = true, errorFound = false) } }
       .debounce(500)
-      .onEach { setState { copy(isLoading = true) } }
       .map { searchTerm -> githubRepository.search(searchTerm) }
       .onEach { searchResult ->
         searchResult.fold(
@@ -67,7 +66,6 @@ class SearchViewModel @Inject constructor(
 
   override fun handleEvents(event: SearchTermChangedViewEvent) {
     viewModelScope.launch {
-      setState { copy(searchTerm = event.term, errorFound = false) }
       searchTermFlow.emit(event.term)
     }
   }

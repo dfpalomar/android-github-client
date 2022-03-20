@@ -1,7 +1,7 @@
-package com.playground.android.githubclient.domain.model
+package com.playground.android.githubclient.data
 
-import com.playground.android.githubclient.data.ContributorDTO
-import com.playground.android.githubclient.data.SearchResponseDTO
+import com.playground.android.githubclient.domain.model.Contributor
+import com.playground.android.githubclient.domain.model.Repository
 
 fun SearchResponseDTO.toRepositoryList() = items.map {
   Repository(

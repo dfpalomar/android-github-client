@@ -98,7 +98,7 @@ fun Search(
           message = "There was an error",
         )
       } else {
-        if (viewState != SearchViewState.Idle && viewState.repositoryList.isEmpty()) {
+        if (viewState.repositoryList.isEmpty() && viewState.searchTerm.isNotEmpty()) {
           NoResults(viewState.searchTerm)
         } else {
           SearchResultsList(viewState.repositoryList, showContributors)

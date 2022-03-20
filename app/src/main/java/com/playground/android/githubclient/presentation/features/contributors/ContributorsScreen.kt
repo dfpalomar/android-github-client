@@ -77,7 +77,6 @@ private fun Contributors(
         message = "Error loading contributors"
       )
     }
-
   }
 }
 
