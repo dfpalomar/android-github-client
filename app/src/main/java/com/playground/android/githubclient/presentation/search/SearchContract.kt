@@ -1,12 +1,12 @@
-package com.playground.android.githubclient.presentation.trendingrepos
+package com.playground.android.githubclient.presentation.search
 
 import com.playground.android.githubclient.core.ViewEvent
 import com.playground.android.githubclient.core.ViewState
-import com.playground.android.githubclient.domain.Repository
+import com.playground.android.githubclient.domain.model.Repository
 
-data class SearchTopicViewEvent(val text: String) : ViewEvent
+data class SearchTermChangedViewEvent(val term: String) : ViewEvent
 
-data class TrendingReposViewState(
+data class SearchViewState(
   val repositoryList: List<Repository>,
   val searchTerm: String,
   val isLoading: Boolean,
@@ -14,7 +14,7 @@ data class TrendingReposViewState(
 ) : ViewState {
 
   companion object {
-    val Idle = TrendingReposViewState(
+    val Idle = SearchViewState(
       isLoading = false,
       searchTerm = "",
       repositoryList = emptyList(),

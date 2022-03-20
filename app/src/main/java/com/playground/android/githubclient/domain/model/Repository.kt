@@ -1,4 +1,4 @@
-package com.playground.android.githubclient.domain
+package com.playground.android.githubclient.domain.model
 
 data class Repository(
   val fullName: String,

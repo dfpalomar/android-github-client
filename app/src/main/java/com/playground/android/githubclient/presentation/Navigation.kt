@@ -6,22 +6,22 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.playground.android.githubclient.domain.RepositoryId
-import com.playground.android.githubclient.presentation.repodetails.RepoDetailsScreen
-import com.playground.android.githubclient.presentation.trendingrepos.TrendingReposScreen
+import com.playground.android.githubclient.domain.model.RepositoryId
+import com.playground.android.githubclient.presentation.contributors.ContributorsScreen
+import com.playground.android.githubclient.presentation.search.SearchScreen
 
 @Composable
 fun Navigation() {
   val navController = rememberNavController()
   NavHost(navController, startDestination = Screen.TrendingRepos.route) {
-    addTrendingRepos(navController)
-    addRepoDetails(navController)
+    addSearch(navController)
+    addContributors(navController)
   }
 }
 
-private fun NavGraphBuilder.addTrendingRepos(navController: NavController) {
+private fun NavGraphBuilder.addSearch(navController: NavController) {
   composable(route = Screen.TrendingRepos.route) {
-    TrendingReposScreen(
+    SearchScreen(
       showContributors = { repositoryId ->
         navController.navigate(Screen.RepoDetails.createRoute(repositoryId)) {
           launchSingleTop = true
@@ -31,9 +31,9 @@ private fun NavGraphBuilder.addTrendingRepos(navController: NavController) {
   }
 }
 
-private fun NavGraphBuilder.addRepoDetails(navController: NavController) {
+private fun NavGraphBuilder.addContributors(navController: NavController) {
   composable(route = Screen.RepoDetails.route) {
-    RepoDetailsScreen(navController::navigateUp)
+    ContributorsScreen(navController::navigateUp)
   }
 }
 

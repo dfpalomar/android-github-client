@@ -1,6 +1,6 @@
 package com.playground.android.githubclient.data
 
-import com.playground.android.githubclient.domain.Repository
+import com.playground.android.githubclient.domain.model.Repository
 
 data class SearchResponseDTO(
   val items: List<RepositoryDTO>
@@ -33,3 +33,8 @@ fun SearchResponseDTO.toRepositoryList() = items.map {
   )
 }
 
+data class ContributorDTO(
+  val login: String,
+  val avatar_url: String,
+  val html_url: String
+)

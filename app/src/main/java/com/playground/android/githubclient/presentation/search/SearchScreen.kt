@@ -1,4 +1,4 @@
-package com.playground.android.githubclient.presentation.trendingrepos
+package com.playground.android.githubclient.presentation.search
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -52,32 +52,32 @@ import coil.compose.rememberImagePainter
 import coil.transform.CircleCropTransformation
 import com.playground.android.githubclient.R
 import com.playground.android.githubclient.R.string
-import com.playground.android.githubclient.domain.Repository
-import com.playground.android.githubclient.domain.RepositoryId
+import com.playground.android.githubclient.domain.model.Repository
+import com.playground.android.githubclient.domain.model.RepositoryId
 import com.playground.android.githubclient.presentation.common.ErrorMessage
 import com.playground.android.githubclient.presentation.common.IndeterminateProgressIndicator
 import com.playground.android.githubclient.presentation.util.rememberFlowWithLifecycle
 
 @Composable
-fun TrendingReposScreen(
+fun SearchScreen(
   showContributors: (RepositoryId) -> Unit
 ) {
-  val viewModel: TrendingReposViewModel = hiltViewModel()
+  val viewModel: SearchViewModel = hiltViewModel()
 
-  val searchViewState: TrendingReposViewState by rememberFlowWithLifecycle(
+  val searchViewState: SearchViewState by rememberFlowWithLifecycle(
     viewModel.viewState
-  ).collectAsState(initial = TrendingReposViewState.Idle)
+  ).collectAsState(initial = SearchViewState.Idle)
 
   Search(
     searchViewState,
-    searchTerm = { viewModel.setEvent(SearchTopicViewEvent(it)) },
+    searchTerm = { viewModel.setEvent(SearchTermChangedViewEvent(it)) },
     showContributors
   )
 }
 
 @Composable
 fun Search(
-  viewState: TrendingReposViewState,
+  viewState: SearchViewState,
   searchTerm: (String) -> Unit,
   showContributors: (String) -> Unit // TODO Use value class?
 ) {
@@ -98,7 +98,7 @@ fun Search(
           errorMessage = "Error searching", // TODO change message
         )
       } else {
-        if (viewState != TrendingReposViewState.Idle && viewState.repositoryList.isEmpty()) {
+        if (viewState != SearchViewState.Idle && viewState.repositoryList.isEmpty()) {
           NoResults(viewState.searchTerm)
         } else {
           SearchResultsList(viewState.repositoryList, showContributors)

@@ -1,4 +1,4 @@
-package com.playground.android.githubclient.presentation.trendingrepos
+package com.playground.android.githubclient.presentation.search
 
 import androidx.lifecycle.viewModelScope
 import com.playground.android.githubclient.core.BaseViewModel
@@ -6,7 +6,7 @@ import com.playground.android.githubclient.core.ViewSideEffect
 import com.playground.android.githubclient.data.GithubApi
 import com.playground.android.githubclient.data.QUERY_PARAM_TOPIC
 import com.playground.android.githubclient.data.toRepositoryList
-import com.playground.android.githubclient.domain.Repository
+import com.playground.android.githubclient.domain.model.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
@@ -19,17 +19,16 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.skip
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @OptIn(InternalCoroutinesApi::class)
 @HiltViewModel
-class TrendingReposViewModel @Inject constructor(
+class SearchViewModel @Inject constructor(
   githubApi: GithubApi
-) : BaseViewModel<SearchTopicViewEvent, TrendingReposViewState, ViewSideEffect>() {
+) : BaseViewModel<SearchTermChangedViewEvent, SearchViewState, ViewSideEffect>() {
 
-  override fun setInitialState() = TrendingReposViewState.Idle
+  override fun setInitialState() = SearchViewState.Idle
 
   private val searchTermFlow = MutableStateFlow("")
 
@@ -57,10 +56,10 @@ class TrendingReposViewModel @Inject constructor(
       .launchIn(viewModelScope)
   }
 
-  override fun handleEvents(event: SearchTopicViewEvent) {
+  override fun handleEvents(event: SearchTermChangedViewEvent) {
     viewModelScope.launch {
-      setState { copy(searchTerm = event.text, errorFound = false) }
-      searchTermFlow.emit(event.text)
+      setState { copy(searchTerm = event.term, errorFound = false) }
+      searchTermFlow.emit(event.term)
     }
   }
 }
