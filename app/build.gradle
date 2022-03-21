@@ -50,6 +50,7 @@ android {
 
 dependencies {
   testImplementation "junit:junit:$junit_version"
+  testImplementation "app.cash.turbine:turbine:$turbine_version"
   debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
   androidTestImplementation "androidx.test.ext:junit:$androidx_junit_version"
   androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
