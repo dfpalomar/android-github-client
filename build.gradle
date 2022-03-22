@@ -16,7 +16,7 @@ buildscript {
     navigation_version = '2.4.1'
     hilt_navigation_version = '1.0.0'
     okHttp_logger_version = '4.9.3'
-    store_version = '4.0.1'
+    store_version = '4.0.4-KT15'
     room_version = "2.4.2"
     splash_screen_version = '1.0.0-beta01'
   }

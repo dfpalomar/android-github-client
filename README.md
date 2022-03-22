@@ -1,1 +1,1 @@
-# Android github client [![Main](https://github.com/dfpalomar/android-github-client/actions/workflows/main_workflow.yml/badge.svg)](https://github.com/dfpalomar/android-github-client/actions/workflows/main_workflow.yml)
+# Android github client [![main](https://github.com/dfpalomar/android-github-client/actions/workflows/main_workflow.yml/badge.svg)](https://github.com/dfpalomar/android-github-client/actions/workflows/main_workflow.yml)

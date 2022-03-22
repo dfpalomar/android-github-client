@@ -10,9 +10,9 @@ import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.drop
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -37,7 +37,7 @@ class SearchViewModel @Inject constructor(
       .drop(1)
       .onEach { setState { copy(searchTerm = it, isLoading = true, errorFound = false) } }
       .debounce(500)
-      .map { searchTerm -> githubRepository.search(searchTerm) }
+      .flatMapLatest { searchTerm -> githubRepository.search(searchTerm) }
       .onEach { searchResult ->
         searchResult.fold(
           onSuccess = { repositoryList ->
@@ -60,7 +60,6 @@ class SearchViewModel @Inject constructor(
           }
         )
       }
-      .flowOn(Dispatchers.Default)
       .launchIn(viewModelScope)
   }
 

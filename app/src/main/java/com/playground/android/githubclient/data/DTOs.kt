@@ -5,11 +5,13 @@ data class SearchResponseDTO(
 )
 
 data class RepositoryDTO(
+  val id: Long,
   val name: String,
   val owner: OwnerDTO,
   val stargazers_count: Int,
   val forks_count: Int,
-  val license: LicenseDTO?
+  val license: LicenseDTO?,
+  val topics: List<String>
 )
 
 data class OwnerDTO(

@@ -5,6 +5,7 @@ import com.playground.android.githubclient.data.GithubRepository
 import com.playground.android.githubclient.presentation.core.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.InternalCoroutinesApi
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -22,14 +23,17 @@ class ContributorsViewModel @Inject constructor(
 
   private fun loadContributors(event: LoadContributorsViewEvent) {
     viewModelScope.launch {
-      githubRepository.listContributors(event.repoCoordinate).fold(
-        onSuccess = { contributorsList ->
-          setState { ContributorsViewState.Data(contributorsList) }
-        },
-        onFailure = {
-          setState { ContributorsViewState.Error }
+      githubRepository.listContributors(event.repoCoordinate)
+        .collect { result ->
+          result.fold(
+            onSuccess = { contributorsList ->
+              setState { ContributorsViewState.Data(contributorsList) }
+            },
+            onFailure = {
+              setState { ContributorsViewState.Error }
+            }
+          )
         }
-      )
     }
   }
 }

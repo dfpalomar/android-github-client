@@ -54,6 +54,7 @@ import com.playground.android.githubclient.R
 import com.playground.android.githubclient.R.string
 import com.playground.android.githubclient.domain.model.Repository
 import com.playground.android.githubclient.domain.model.RepositoryCoordinate
+import com.playground.android.githubclient.domain.model.coordinate
 import com.playground.android.githubclient.presentation.common.ErrorMessage
 import com.playground.android.githubclient.presentation.common.IndeterminateProgressIndicator
 import com.playground.android.githubclient.presentation.util.rememberFlowWithLifecycle
@@ -260,12 +261,14 @@ private fun SearchResultListItem(
 private fun PreviewSearchResultListItem() {
   SearchResultListItem(
     Repository(
+      id = 1010,
       name = "Retrofit",
       owner = "Square",
       ownerAvatarUrl = "",
       stars = 45000,
       forks = 899,
-      license = "MIT"
+      license = "MIT",
+      topics = emptyList()
     )
   ) {}
 }
