@@ -62,7 +62,7 @@ class ContributorsViewModelTest {
   }
 
   @Test
-  fun `When error fetching contributors list  then set Error as ViewState`() = runBlocking {
+  fun `When error fetching contributors list then set Error as ViewState`() = runBlocking {
 
     val repositoryCoordinate = TestRepositoryCoordinate.create()
 

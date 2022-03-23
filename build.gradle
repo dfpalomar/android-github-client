@@ -8,6 +8,7 @@ buildscript {
     mockito_kotlin_version = '3.2.0'
     mockito_android_version = '3.12.4'
     mockk_version = '1.12.2'
+    coroutines_test_version = '1.6.0-native-mt'
     android_core_version = '1.7.0'
     activity_compose_version = '1.4.0'
     turbine_version = '0.7.0'
