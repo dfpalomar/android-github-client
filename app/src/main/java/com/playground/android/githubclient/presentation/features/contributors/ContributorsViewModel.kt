@@ -23,7 +23,7 @@ class ContributorsViewModel @Inject constructor(
 
   private fun loadContributors(event: LoadContributorsViewEvent) {
     viewModelScope.launch {
-      githubRepository.listContributors(event.repoCoordinate)
+      githubRepository.contributorsList(event.repoCoordinate)
         .collect { result ->
           result.fold(
             onSuccess = { contributorsList ->

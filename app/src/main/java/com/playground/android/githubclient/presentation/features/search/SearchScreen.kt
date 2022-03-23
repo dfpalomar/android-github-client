@@ -153,7 +153,7 @@ private fun SearchBar(
 @Composable
 private fun NoResults(searchTerm: String) {
   Text(
-    modifier = Modifier.fillMaxSize(),
+    modifier = Modifier.fillMaxSize().padding(top = 24.dp),
     text = "No results found for \"$searchTerm\"",
     style = MaterialTheme.typography.body1,
     textAlign = TextAlign.Center

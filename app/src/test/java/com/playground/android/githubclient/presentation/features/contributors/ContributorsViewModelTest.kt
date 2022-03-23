@@ -47,7 +47,7 @@ class ContributorsViewModelTest {
     val contributorsList = listOf(TestContributor.create())
 
     every {
-      githubRepository.listContributors(repositoryCoordinate)
+      githubRepository.contributorsList(repositoryCoordinate)
     } returns flowOf(Result.success(contributorsList))
 
     contributorsViewModel.setEvent(
@@ -67,7 +67,7 @@ class ContributorsViewModelTest {
     val repositoryCoordinate = TestRepositoryCoordinate.create()
 
     every {
-      githubRepository.listContributors(repositoryCoordinate)
+      githubRepository.contributorsList(repositoryCoordinate)
     } returns flowOf(Result.failure(Exception()))
 
     contributorsViewModel.setEvent(
