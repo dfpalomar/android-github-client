@@ -96,7 +96,7 @@ fun Search(
       if (viewState.errorFound) {
         ErrorMessage(
           modifier = Modifier.fillMaxSize(),
-          message = "There was an error",
+          message = stringResource(string.search_loading_error),
         )
       } else {
         if (viewState.repositoryList.isEmpty() && viewState.searchTerm.isNotEmpty()) {

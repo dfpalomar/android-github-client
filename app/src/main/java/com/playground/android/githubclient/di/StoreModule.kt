@@ -34,9 +34,7 @@ object StoreModule {
       },
       sourceOfTruth = SourceOfTruth.of(
         reader = { searchTerm -> repositoryDAO.search(searchTerm) },
-        writer = { _, list: List<Repository> ->
-          list.forEach { repositoryDAO.insert(it) }
-        },
+        writer = { _, list: List<Repository> -> list.forEach { repositoryDAO.insert(it) } },
         deleteAll = { repositoryDAO.deleteAll() }
       )
     )

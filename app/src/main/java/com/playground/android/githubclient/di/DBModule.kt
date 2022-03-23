@@ -10,6 +10,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 
+private const val DATABASE_NAME = "github_android_client_db"
+
 @Module
 @InstallIn(SingletonComponent::class)
 object DBModule {
@@ -19,7 +21,7 @@ object DBModule {
     @ApplicationContext context: Context
   ): AppDatabase = Room.databaseBuilder(
     context,
-    AppDatabase::class.java, "github_client_db"
+    AppDatabase::class.java, DATABASE_NAME
   ).build()
 
   @Provides

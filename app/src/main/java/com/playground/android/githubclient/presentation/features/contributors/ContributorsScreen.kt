@@ -28,11 +28,14 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberImagePainter
 import coil.transform.CircleCropTransformation
+import com.playground.android.githubclient.R
 import com.playground.android.githubclient.domain.model.Contributor
 import com.playground.android.githubclient.domain.model.RepositoryCoordinate
 import com.playground.android.githubclient.presentation.common.ErrorMessage
@@ -40,6 +43,9 @@ import com.playground.android.githubclient.presentation.common.IndeterminateProg
 import com.playground.android.githubclient.presentation.features.contributors.ContributorsViewState.Data
 import com.playground.android.githubclient.presentation.features.contributors.ContributorsViewState.Error
 import com.playground.android.githubclient.presentation.features.contributors.ContributorsViewState.Loading
+import com.playground.android.githubclient.presentation.util.TAG_CONTRIBUTORS_SCREEN_TITLE
+import com.playground.android.githubclient.presentation.util.TAG_TOOLBAR_BACK_BUTTON
+import com.playground.android.githubclient.presentation.util.TAG_USER_AVATAR_VIEW
 import com.playground.android.githubclient.presentation.util.rememberFlowWithLifecycle
 
 @Composable
@@ -52,7 +58,7 @@ fun ContributorsScreen(
 
   val viewState: ContributorsViewState by rememberFlowWithLifecycle(
     viewModel.viewState
-  ).collectAsState(initial = ContributorsViewState.Loading)
+  ).collectAsState(initial = Loading)
 
   LaunchedEffect(repositoryCoordinate) {
     viewModel.setEvent(LoadContributorsViewEvent(repositoryCoordinate))
@@ -61,7 +67,7 @@ fun ContributorsScreen(
 }
 
 @Composable
-private fun Contributors(
+fun Contributors(
   repoName: String,
   navigateUp: () -> Unit,
   viewState: ContributorsViewState,
@@ -74,7 +80,7 @@ private fun Contributors(
       is Data -> ContributorsList(viewState.contributors, showContributorPage)
       is Error -> ErrorMessage(
         modifier = Modifier.fillMaxSize(),
-        message = "Error loading contributors"
+        message = stringResource(R.string.contributors_loading_error)
       )
     }
   }
@@ -89,13 +95,19 @@ fun ContributorsTopAppBAr(
     backgroundColor = MaterialTheme.colors.background,
     contentColor = contentColorFor(MaterialTheme.colors.background),
     navigationIcon = {
-      IconButton(onClick = navigateUp) {
+      IconButton(
+        modifier = Modifier.testTag(TAG_TOOLBAR_BACK_BUTTON),
+        onClick = navigateUp
+      ) {
         Icon(Icons.Default.ArrowBack, contentDescription = null)
       }
     },
     title = {
       Column(Modifier.fillMaxWidth()) {
-        Text(text = title)
+        Text(
+          modifier = Modifier.testTag(TAG_CONTRIBUTORS_SCREEN_TITLE),
+          text = title
+        )
         Text(
           text = "Contributors",
           style = MaterialTheme.typography.caption
@@ -143,7 +155,8 @@ fun ContributorListItem(
         ),
         modifier = Modifier
           .height(56.dp)
-          .width(56.dp),
+          .width(56.dp)
+          .testTag(TAG_USER_AVATAR_VIEW),
         contentDescription = null
       )
       Text(

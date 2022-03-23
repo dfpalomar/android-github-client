@@ -12,8 +12,11 @@ import androidx.compose.material.icons.filled.ErrorOutline
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.playground.android.githubclient.presentation.util.TAG_ERROR_VIEW
+import com.playground.android.githubclient.presentation.util.TAG_PROGRESS_INDICATOR
 
 @Composable
 fun ErrorMessage(
@@ -23,7 +26,8 @@ fun ErrorMessage(
   Column(
     modifier = modifier
       .fillMaxWidth()
-      .padding(vertical = 32.dp),
+      .padding(vertical = 32.dp)
+      .testTag(TAG_ERROR_VIEW),
     horizontalAlignment = Alignment.CenterHorizontally,
     verticalArrangement = Arrangement.Center
   ) {

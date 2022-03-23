@@ -56,14 +56,18 @@ private fun NavGraphBuilder.addContributors(navController: NavController) {
 
 private sealed class Screen(val route: String) {
 
-  object Search : Screen("search")
+  object Search : Screen(ROUTE_SEARCH)
 
-  object Contributors : Screen("contributors/{$ARG_OWNER}/{$ARG_REPO_NAME}") {
+  object Contributors : Screen("$ROUTE_CONTRIBUTORS/{$ARG_OWNER}/{$ARG_REPO_NAME}") {
     fun createRoute(coordinate: RepositoryCoordinate) =
-      "contributors/${coordinate.owner}/${coordinate.name}"
+      "$ROUTE_CONTRIBUTORS/${coordinate.owner}/${coordinate.name}"
   }
 
   companion object {
+
+    const val ROUTE_SEARCH = "search"
+    const val ROUTE_CONTRIBUTORS = "contributors"
+
     const val ARG_OWNER = "owner"
     const val ARG_REPO_NAME = "repo"
   }
