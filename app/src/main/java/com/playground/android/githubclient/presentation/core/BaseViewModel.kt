@@ -12,8 +12,7 @@ import kotlinx.coroutines.launch
 interface ViewState
 interface ViewEvent
 
-abstract class BaseViewModel<Event : ViewEvent, UiState : ViewState> :
-  ViewModel() {
+abstract class BaseViewModel<Event : ViewEvent, UiState : ViewState> : ViewModel() {
 
   private val initialState: UiState by lazy { setInitialState() }
 
