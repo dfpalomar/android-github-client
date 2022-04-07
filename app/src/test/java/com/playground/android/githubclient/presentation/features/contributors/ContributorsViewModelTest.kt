@@ -10,7 +10,7 @@ import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
@@ -34,14 +34,14 @@ class ContributorsViewModelTest {
   }
 
   @Test
-  fun `Set Loading as initial ViewState`() = runBlocking {
+  fun `Set Loading as initial ViewState`() = runTest {
     contributorsViewModel.viewState.test {
       assertEquals(ContributorsViewState.Loading, awaitItem())
     }
   }
 
   @Test
-  fun `When contributors list available then set Data as ViewState`() = runBlocking {
+  fun `When contributors list available then set Data as ViewState`() = runTest {
 
     val repositoryCoordinate = TestRepositoryCoordinate.create()
     val contributorsList = listOf(TestContributor.create())
@@ -62,7 +62,7 @@ class ContributorsViewModelTest {
   }
 
   @Test
-  fun `When error fetching contributors list then set Error as ViewState`() = runBlocking {
+  fun `When error fetching contributors list then set Error as ViewState`() = runTest {
 
     val repositoryCoordinate = TestRepositoryCoordinate.create()
 
