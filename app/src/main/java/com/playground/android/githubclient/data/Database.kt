@@ -1,35 +1,9 @@
 package com.playground.android.githubclient.data
 
-import androidx.room.Dao
-import androidx.room.Database
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import androidx.room.RoomDatabase
 import androidx.room.TypeConverter
-import com.playground.android.githubclient.domain.model.Repository
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import kotlinx.coroutines.flow.Flow
-
-@Database(entities = [Repository::class], version = 1)
-abstract class AppDatabase : RoomDatabase() {
-  abstract fun repositoryDao(): RepositoryDAO
-}
-
-@Dao
-interface RepositoryDAO {
-
-  @Insert(onConflict = OnConflictStrategy.REPLACE)
-  suspend fun insert(repository: Repository)
-
-  @Query("SELECT * FROM repositories WHERE topics LIKE '%' || :searchTerm || '%'")
-  fun search(searchTerm: String): Flow<List<Repository>?>
-
-  @Query("DELETE FROM repositories")
-  suspend fun deleteAll()
-}
 
 class Converter {
 
