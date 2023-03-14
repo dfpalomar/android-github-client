@@ -4,7 +4,7 @@ import com.playground.android.githubclient.domain.model.Contributor
 import com.playground.android.githubclient.domain.model.Repository
 import com.playground.android.githubclient.domain.model.RepositoryCoordinate
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.emptyFlow
 import javax.inject.Inject
 
 class GithubRepository @Inject constructor(
@@ -14,25 +14,14 @@ class GithubRepository @Inject constructor(
   fun search(
     searchTerm: String
   ): Flow<Result<List<Repository>>> {
-    return flow {
-      val searchResult = runCatching {
-        githubApi.search(searchTerm).toRepositoryList()
-      }
-      emit(searchResult)
-    }
+    // TODO
+    return emptyFlow()
   }
 
   fun contributorsList(
     repositoryCoordinate: RepositoryCoordinate
   ): Flow<Result<List<Contributor>>> {
-    return flow {
-      val contributorsListResult = runCatching {
-        githubApi.contributors(
-          owner = repositoryCoordinate.owner,
-          repository = repositoryCoordinate.name
-        ).map { it.toContributor() }
-      }
-      emit(contributorsListResult)
-    }
+    // TODO
+    return emptyFlow()
   }
 }

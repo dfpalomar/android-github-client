@@ -122,11 +122,7 @@ private fun ContributorsList(
   contributors: List<Contributor>,
   showContributorPage: (String) -> Unit
 ) {
-  LazyColumn(contentPadding = PaddingValues(vertical = 16.dp)) {
-    itemsIndexed(contributors) { _, contributor ->
-      ContributorListItem(contributor, showContributorPage)
-    }
-  }
+  // TODO
 }
 
 @Composable
