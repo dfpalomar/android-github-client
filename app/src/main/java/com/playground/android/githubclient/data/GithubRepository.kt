@@ -13,22 +13,26 @@ class GithubRepository @Inject constructor(
 
   fun search(
     searchTerm: String
-  ): Flow<Result<List<Repository>>> = flow {
-    val searchResult = runCatching {
-      githubApi.search(searchTerm).toRepositoryList()
+  ): Flow<Result<List<Repository>>> {
+    return flow {
+      val searchResult = runCatching {
+        githubApi.search(searchTerm).toRepositoryList()
+      }
+      emit(searchResult)
     }
-    emit(searchResult)
   }
 
   fun contributorsList(
     repositoryCoordinate: RepositoryCoordinate
-  ): Flow<Result<List<Contributor>>> = flow {
-    val contributorsListResult = runCatching {
-      githubApi.contributors(
-        owner = repositoryCoordinate.owner,
-        repository = repositoryCoordinate.name
-      ).map { it.toContributor() }
+  ): Flow<Result<List<Contributor>>> {
+    return flow {
+      val contributorsListResult = runCatching {
+        githubApi.contributors(
+          owner = repositoryCoordinate.owner,
+          repository = repositoryCoordinate.name
+        ).map { it.toContributor() }
+      }
+      emit(contributorsListResult)
     }
-    emit(contributorsListResult)
   }
 }
