@@ -1,7 +1,5 @@
 package com.playground.android.githubclient.presentation
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -19,16 +17,13 @@ class MainActivity : ComponentActivity() {
     super.onCreate(savedInstanceState)
     setContent {
       GithubClientTheme {
-        Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
+        Surface(
+          modifier = Modifier.fillMaxSize(),
+          color = MaterialTheme.colors.background
+        ) {
           Navigation()
         }
       }
-    }
-  }
-
-  companion object {
-    fun start(context: Context) {
-      context.startActivity(Intent(context, MainActivity::class.java))
     }
   }
 }

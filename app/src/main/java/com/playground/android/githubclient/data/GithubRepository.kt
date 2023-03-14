@@ -14,7 +14,6 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
-@OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
 class GithubRepository @Inject constructor(
   private val repositoriesListStore: Store<String, List<Repository>>,
   private val contributorsListStore: Store<RepositoryCoordinate, List<Contributor>>

@@ -17,7 +17,6 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@OptIn(InternalCoroutinesApi::class)
 @HiltViewModel
 class SearchViewModel @Inject constructor(
   private val githubRepository: GithubRepository

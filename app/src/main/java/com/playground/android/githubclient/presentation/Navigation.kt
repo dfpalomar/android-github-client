@@ -25,7 +25,7 @@ fun Navigation() {
 private fun NavGraphBuilder.addSearch(navController: NavController) {
   composable(route = Screen.Search.route) {
     SearchScreen(
-      showContributors = { repoCoordinate ->
+      showContributors = { repoCoordinate: RepositoryCoordinate ->
         navController.navigate(Screen.Contributors.createRoute(repoCoordinate)) {
           launchSingleTop = true
         }
